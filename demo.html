@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demo · Zona de alumnos/as — Con voz propia</title>
+<meta name="description" content="Demo interactiva de la zona de alumnos/as de Con voz propia: temario que se desbloquea, entregas corregidas, calendario y comunidad de grupo.">
+<link rel="canonical" href="https://convozpropia.es/demo.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Demo · Zona de alumnos/as — Con voz propia">
+<meta property="og:description" content="Demo interactiva de la zona de alumnos/as de Con voz propia: temario que se desbloquea, entregas corregidas, calendario y comunidad de grupo.">
+<meta property="og:image" content="https://convozpropia.es/assets/og-image.png">
+<meta property="og:url" content="https://convozpropia.es/demo.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://convozpropia.es/assets/og-image.png">
+<meta name="theme-color" content="#B76E79">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><path d="M 177.9 63.7 A 86 86 0 1 1 136.3 22.1" fill="none" stroke="%23B76E79" stroke-width="9" stroke-linecap="round"/><path d="M69 69 L100 132 L131 69" fill="none" stroke="%23B76E79" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/></svg>'>
+<link rel="stylesheet" href="css/fonts.css">
+<style>
+  :root{
+    --rosa:#B76E79; --tinta:#5C3038; --acento:#DCA6AE; --fondo:#F9F0F1;
+    --gris:#7A6A6D; --borde:#EFDFE1; --ok:#5F8F6C; --ok-bg:#EAF3EC;
+    --pendiente:#8A6414; --pendiente-bg:#FBEED3;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Inter',sans-serif;color:var(--tinta);background:#FBF8F8;line-height:1.55}
+  h1,h2,h3{font-family:'Poppins',sans-serif;line-height:1.3}
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit;cursor:pointer}
+
+  /* ══════ LAYOUT ══════ */
+  .app{display:grid;grid-template-columns:250px 1fr;min-height:100vh}
+  @media (max-width:880px){ .app{grid-template-columns:1fr} }
+
+  /* ══════ SIDEBAR ══════ */
+  .sidebar{
+    background:#fff;border-right:1px solid var(--borde);padding:22px 16px;
+    display:flex;flex-direction:column;position:sticky;top:0;height:100vh;
+  }
+  @media (max-width:880px){ .sidebar{display:none} }
+  .sidebar .marca{display:flex;align-items:center;gap:10px;padding:6px 10px 22px}
+  .sidebar .marca svg{width:32px;height:32px}
+  .sidebar .marca span{font-family:'Poppins',sans-serif;font-weight:500;font-size:.88rem;letter-spacing:.1em}
+  .nav-grupo{font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gris);padding:14px 10px 6px}
+  .nav-item{
+    display:flex;align-items:center;gap:11px;padding:9px 10px;border-radius:10px;
+    font-size:.9rem;color:var(--tinta);transition:background .15s ease;margin-bottom:2px;
+  }
+  .nav-item svg{width:19px;height:19px;color:var(--gris);flex-shrink:0;transition:color .15s ease}
+  .nav-item:hover{background:var(--fondo)}
+  .nav-item.activo{background:var(--rosa);color:#fff}
+  .nav-item.activo svg{color:#fff}
+  .nav-item .badge{
+    margin-left:auto;background:var(--fondo);color:var(--rosa);font-size:.68rem;font-weight:600;
+    padding:1px 7px;border-radius:99px;
+  }
+  .nav-item.activo .badge{background:rgba(255,255,255,.25);color:#fff}
+  .sidebar-pie{
+    padding-top:14px;margin-top:14px;border-top:1px solid var(--borde);
+    display:flex;align-items:center;gap:10px;padding-left:10px;
+  }
+  .avatar{
+    width:36px;height:36px;border-radius:50%;background:var(--fondo);color:var(--rosa);
+    display:flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;
+    font-weight:600;font-size:.9rem;flex-shrink:0;
+  }
+  .sidebar-pie .quien b{display:block;font-size:.85rem}
+  .sidebar-pie .quien span{font-size:.72rem;color:var(--gris)}
+
+  /* ══════ TOPBAR MÓVIL ══════ */
+  .topbar-movil{display:none;background:#fff;border-bottom:1px solid var(--borde);padding:14px 20px;align-items:center;gap:12px}
+  @media (max-width:880px){ .topbar-movil{display:flex} }
+  .topbar-movil svg{width:28px;height:28px}
+  .topbar-movil span{font-family:'Poppins',sans-serif;font-weight:500;font-size:.85rem;letter-spacing:.08em;margin-right:auto}
+
+  /* ══════ MAIN ══════ */
+  main{padding:0 40px 60px}
+  @media (max-width:600px){ main{padding:0 18px 48px} }
+
+  .topbar{
+    display:flex;align-items:center;gap:16px;padding:20px 0;position:sticky;top:0;
+    background:#FBF8F8;z-index:10;
+  }
+  .buscador{
+    flex:1;max-width:360px;display:flex;align-items:center;gap:10px;
+    background:#fff;border:1px solid var(--borde);border-radius:11px;padding:9px 14px;
+  }
+  .buscador svg{width:17px;height:17px;color:var(--gris);flex-shrink:0}
+  .buscador input{
+    border:none;outline:none;background:none;font-family:'Inter',sans-serif;font-size:.86rem;
+    color:var(--tinta);width:100%;
+  }
+  .buscador input::placeholder{color:#B8ACAC}
+  .topbar-acciones{display:flex;align-items:center;gap:14px;margin-left:auto}
+  .campana{
+    position:relative;width:38px;height:38px;border-radius:10px;border:1px solid var(--borde);
+    background:#fff;display:flex;align-items:center;justify-content:center;color:var(--tinta);
+  }
+  .campana svg{width:18px;height:18px}
+  .campana .punto{
+    position:absolute;top:8px;right:8px;width:7px;height:7px;border-radius:50%;
+    background:var(--rosa);border:1.5px solid #fff;
+  }
+
+  .cabecera-vista{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:26px;flex-wrap:wrap;gap:10px}
+  .cabecera-vista h1{font-size:1.5rem;font-weight:600}
+  .cabecera-vista p{color:var(--gris);font-size:.9rem;margin-top:4px}
+
+  .vista{display:none}
+  .vista.activa{display:block}
+
+  /* ══════ TARJETAS GENERALES ══════ */
+  .panel{background:#fff;border:1px solid var(--borde);border-radius:16px;padding:22px}
+
+  /* ── dashboard: resumen ── */
+  .continua-card{
+    display:flex;align-items:center;gap:16px;text-decoration:none;color:inherit;
+    margin-bottom:20px;transition:translate .2s ease, box-shadow .2s ease;
+  }
+  .continua-card:hover{translate:0 -2px;box-shadow:0 8px 20px rgba(92,48,56,.08)}
+  .continua-icono{
+    width:44px;height:44px;border-radius:12px;background:var(--fondo);flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .continua-kicker{font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--rosa)}
+  .continua-card h3{font-size:1rem;margin-top:2px}
+  .continua-card p{font-size:.82rem;color:var(--gris);margin-top:2px}
+
+  .resumen-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:20px;margin-bottom:24px}
+  @media (max-width:760px){ .resumen-grid{grid-template-columns:1fr} }
+
+  .progreso-panel{display:flex;align-items:center;gap:24px}
+  .anillo{position:relative;width:96px;height:96px;flex-shrink:0}
+  .anillo svg{width:100%;height:100%;transform:rotate(-90deg)}
+  .anillo .num{
+    position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  }
+  .anillo .num b{font-family:'Poppins',sans-serif;font-weight:700;font-size:1.3rem;color:var(--tinta)}
+  .anillo .num span{font-size:.62rem;color:var(--gris)}
+  .progreso-texto h3{font-size:1rem;margin-bottom:4px}
+  .progreso-texto p{font-size:.85rem;color:var(--gris)}
+  .progreso-texto .pill{
+    display:inline-block;margin-top:10px;background:var(--fondo);color:var(--rosa);
+    font-size:.76rem;font-weight:600;padding:4px 12px;border-radius:99px;
+  }
+
+  .proximas ul{list-style:none}
+  .proximas li{
+    display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px dashed var(--borde);font-size:.86rem;
+  }
+  .proximas li:last-child{border-bottom:none;padding-bottom:0}
+  .fecha-chip{
+    background:var(--fondo);color:var(--rosa);border-radius:10px;padding:6px 9px;text-align:center;
+    font-family:'Poppins',sans-serif;font-weight:600;flex-shrink:0;min-width:44px;
+  }
+  .fecha-chip b{display:block;font-size:1rem;line-height:1.1}
+  .fecha-chip span{font-size:.6rem;text-transform:uppercase}
+  .proximas .txt b{display:block;font-size:.87rem}
+  .proximas .txt span{font-size:.76rem;color:var(--gris)}
+
+  .novedades{margin-top:24px}
+  .novedades h2, .modulos h2, .entregas-panel h2{font-size:1.05rem;margin-bottom:14px}
+  .nov-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+  .nov-card{
+    background:#fff;border:1px solid var(--borde);border-radius:14px;padding:16px 18px;
+    position:relative;transition:translate .2s ease, box-shadow .2s ease;
+  }
+  .nov-card:hover{translate:0 -2px;box-shadow:0 8px 20px rgba(92,48,56,.08)}
+  .nov-card .tag{font-size:.68rem;font-weight:600;color:var(--rosa);text-transform:uppercase;letter-spacing:.06em}
+  .nov-card h4{font-size:.92rem;margin:6px 0 4px}
+  .nov-card p{font-size:.8rem;color:var(--gris)}
+  .nov-card .nuevo-dot{
+    position:absolute;top:14px;right:14px;width:8px;height:8px;border-radius:50%;background:var(--rosa);
+  }
+
+  /* ── temario: módulos ── */
+  .modulo{margin-bottom:26px}
+  .modulo-cabecera{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+  .modulo-cabecera h3{font-size:1rem}
+  .modulo-cabecera .cuenta{font-size:.78rem;color:var(--gris)}
+  .modulo-barra{flex:1;height:6px;background:var(--fondo);border-radius:99px;overflow:hidden;max-width:140px}
+  .modulo-barra i{display:block;height:100%;background:linear-gradient(90deg,var(--rosa),var(--acento));border-radius:99px}
+
+  .temas-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+  .tema-card{
+    background:#fff;border:1px solid var(--borde);border-radius:14px;padding:16px 18px;
+    display:flex;gap:12px;align-items:flex-start;transition:translate .2s ease, box-shadow .2s ease;
+  }
+  .tema-card:not(.bloqueado):hover{translate:0 -2px;box-shadow:0 8px 20px rgba(92,48,56,.08)}
+  .tema-card .num{
+    width:32px;height:32px;border-radius:9px;background:var(--fondo);color:var(--rosa);flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;font-weight:700;font-size:.85rem;
+  }
+  .tema-card.completo .num{background:var(--ok-bg);color:var(--ok)}
+  .tema-card.bloqueado{opacity:.55}
+  .tema-card.bloqueado .num{background:#F3F1F1;color:var(--gris)}
+  .tema-card h4{font-size:.9rem;margin-bottom:3px}
+  .tema-card p{font-size:.78rem;color:var(--gris)}
+  .tema-card .estado-mini{font-size:.72rem;font-weight:600;margin-top:6px;display:inline-block}
+  .tema-card .estado-mini.completo{color:var(--ok)}
+  .tema-card .estado-mini.pendiente{color:var(--gris)}
+  .tema-card .candado{margin-left:auto;font-size:.9rem;color:var(--gris)}
+
+  /* ── entregas ── */
+  .tabla-entregas{background:#fff;border:1px solid var(--borde);border-radius:16px;overflow:hidden;margin-bottom:20px}
+  .fila-e{
+    display:grid;grid-template-columns:1fr auto auto;gap:16px;align-items:center;
+    padding:16px 20px;border-bottom:1px solid var(--borde);font-size:.87rem;
+  }
+  .fila-e:last-child{border-bottom:none}
+  .fila-e .doc b{display:block;font-size:.9rem}
+  .fila-e .doc span{font-size:.76rem;color:var(--gris)}
+  .estado-tag{font-size:.72rem;font-weight:600;padding:5px 12px;border-radius:99px}
+  .estado-tag.ok{background:var(--ok-bg);color:var(--ok)}
+  .estado-tag.pendiente{background:var(--pendiente-bg);color:var(--pendiente)}
+  .fila-e .accion{color:var(--rosa);font-weight:500;font-family:'Poppins',sans-serif;font-size:.83rem}
+  .subir-zona{
+    border:2px dashed var(--borde);border-radius:16px;padding:32px;text-align:center;
+    color:var(--gris);font-size:.88rem;background:#fff;
+  }
+  .subir-zona b{color:var(--rosa);display:block;margin-bottom:4px;font-size:.95rem}
+
+  /* ── calendario ── */
+  .calendario-layout{display:grid;grid-template-columns:1fr 300px;gap:20px}
+  @media (max-width:900px){ .calendario-layout{grid-template-columns:1fr} }
+  .mes-cabecera{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+  .mes-cabecera h3{font-size:1.05rem}
+  .mes-nav{display:flex;gap:6px}
+  .mes-nav button{
+    width:30px;height:30px;border-radius:8px;border:1px solid var(--borde);background:#fff;
+    display:flex;align-items:center;justify-content:center;color:var(--tinta);
+  }
+  .grid-dias{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;font-size:.72rem;color:var(--gris);text-align:center;margin-bottom:8px}
+  .grid-mes{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+  .dia{
+    aspect-ratio:1;border-radius:10px;display:flex;align-items:center;justify-content:center;
+    font-size:.82rem;position:relative;color:var(--tinta);
+  }
+  .dia.fuera{color:#D8CFCF}
+  .dia.evento{background:var(--fondo);font-weight:600;color:var(--rosa)}
+  .dia.evento::after{
+    content:"";position:absolute;bottom:5px;width:4px;height:4px;border-radius:50%;background:var(--rosa);
+  }
+  .dia.hoy{outline:2px solid var(--rosa);outline-offset:-2px;font-weight:700}
+
+  .agenda h3{font-size:.95rem;margin-bottom:12px}
+  .agenda-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px dashed var(--borde)}
+  .agenda-item:last-child{border-bottom:none}
+  .agenda-item .txt b{display:block;font-size:.85rem}
+  .agenda-item .txt span{font-size:.76rem;color:var(--gris)}
+
+  .aviso-proto{
+    background:var(--tinta);color:#fff;font-size:.76rem;padding:9px 20px;text-align:center;
+  }
+
+  /* ══════ CTA de cierre (demo pública) ══════ */
+  .cierre-demo{
+    margin-top:36px;background:linear-gradient(135deg,var(--tinta) 0%,#4A2530 100%);color:#fff;
+    border-radius:18px;padding:34px 36px;text-align:center;
+  }
+  .cierre-demo h2{color:#fff;font-size:1.25rem}
+  .cierre-demo p{color:#E8CFD4;margin:10px auto 20px;font-size:.9rem;max-width:52ch}
+  .cierre-demo a{
+    display:inline-block;background:#fff;color:var(--tinta);font-family:'Poppins',sans-serif;
+    font-weight:500;padding:11px 26px;border-radius:99px;font-size:.9rem;transition:transform .15s ease;
+  }
+  .cierre-demo a:hover{transform:translateY(-1px)}
+
+  /* ══════ NAV INFERIOR MÓVIL ══════ */
+  .nav-movil{display:none}
+  @media (max-width:880px){
+    .nav-movil{
+      display:flex;position:fixed;bottom:0;left:0;right:0;z-index:40;
+      background:#fff;border-top:1px solid var(--borde);
+      padding:6px 4px calc(6px + env(safe-area-inset-bottom));
+    }
+    .nav-movil a{
+      flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;
+      font-size:.6rem;color:var(--gris);padding:4px 0;
+    }
+    .nav-movil a svg{width:20px;height:20px}
+    .nav-movil a.activo{color:var(--rosa)}
+    main{padding-bottom:96px}
+  }
+
+  /* ── comunidad ── */
+  .nuevo-hilo{
+    display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--gris);
+    font-size:.88rem;margin-bottom:20px;transition:box-shadow .2s ease;
+  }
+  .nuevo-hilo:hover{box-shadow:0 6px 16px rgba(92,48,56,.06)}
+  .hilos{display:flex;flex-direction:column;gap:14px}
+  .hilo-cabecera{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+  .hilo-cabecera b{display:block;font-size:.88rem}
+  .hilo-fecha{font-size:.75rem;color:var(--gris)}
+  .hilo p{font-size:.88rem;color:var(--tinta);line-height:1.5}
+  .hilo-pie{margin-top:10px}
+  .hilo-accion{font-size:.78rem;color:var(--gris)}
+
+  /* ── ajustes ── */
+  .campo{margin-bottom:18px}
+  .campo label{display:block;font-size:.8rem;color:var(--gris);margin-bottom:6px}
+  .campo input{
+    width:100%;border:1px solid var(--borde);border-radius:10px;padding:10px 12px;
+    font-family:'Inter',sans-serif;font-size:.88rem;color:var(--tinta);background:var(--fondo);
+  }
+  .btn-mini{
+    display:inline-block;font-size:.83rem;color:var(--rosa);font-weight:500;
+    font-family:'Poppins',sans-serif;
+  }
+  .campo-switch{display:flex;align-items:center;justify-content:space-between}
+  .campo-switch label{margin-bottom:0}
+  .switch{
+    width:38px;height:22px;border-radius:99px;background:var(--borde);position:relative;flex-shrink:0;
+  }
+  .switch::after{
+    content:"";position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;
+    background:#fff;transition:left .2s ease;
+  }
+  .switch.activo{background:var(--rosa)}
+  .switch.activo::after{left:18px}
+</style>
+<!-- Umami Analytics -->
+<script defer src="https://umami.academiaesparta.es/script.js" data-website-id="65bc82c1-d823-46e6-87de-dd8555c4983e"></script>
+</head>
+<body>
+
+<div class="aviso-proto"><b style="color:var(--acento)">DEMO</b> · Así será la zona de alumnos/as — con datos de ejemplo. <a href="index.html" style="color:#fff;text-decoration:underline">← Volver a la web</a></div>
+
+<div class="topbar-movil">
+  <svg viewBox="0 0 200 200" aria-hidden="true"><path d="M 177.9 63.7 A 86 86 0 1 1 136.3 22.1" fill="none" stroke="#B76E79" stroke-width="7.5" stroke-linecap="round"/><path d="M69 69 L100 132 L131 69" fill="none" stroke="#B76E79" stroke-width="12.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <span>con voz propia</span>
+</div>
+
+<div class="app">
+
+  <!-- ══════════ SIDEBAR ══════════ -->
+  <aside class="sidebar">
+    <div class="marca">
+      <svg viewBox="0 0 200 200" aria-hidden="true"><path d="M 177.9 63.7 A 86 86 0 1 1 136.3 22.1" fill="none" stroke="#B76E79" stroke-width="7.5" stroke-linecap="round"/><path d="M69 69 L100 132 L131 69" fill="none" stroke="#B76E79" stroke-width="12.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>con voz propia</span>
+    </div>
+
+    <div class="nav-grupo">Mi preparación</div>
+    <a class="nav-item activo" data-vista="inicio" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5 12 4l8 7.5"/><path d="M6 10v9a1 1 0 0 0 1 1h3v-6h4v6h3a1 1 0 0 0 1-1v-9"/></svg>
+      Inicio
+    </a>
+    <a class="nav-item" data-vista="temario">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5C4 4.7 4.7 4 5.5 4H11a2 2 0 0 1 2 2v13a1.5 1.5 0 0 0-1.5-1.5H4V5.5Z"/><path d="M20 5.5c0-.8-.7-1.5-1.5-1.5H13a2 2 0 0 0-2 2v13a1.5 1.5 0 0 1 1.5-1.5H20V5.5Z"/></svg>
+      Temario
+      <span class="badge">8/25</span>
+    </a>
+    <a class="nav-item" data-vista="entregas">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1-4L15.5 5.5l3 3L8 20l-4 1Z"/><path d="M13 7l3 3"/></svg>
+      Mis entregas
+      <span class="badge">1</span>
+    </a>
+    <a class="nav-item" data-vista="calendario">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 9.5h17"/><path d="M8 3v4M16 3v4"/></svg>
+      Calendario
+    </a>
+
+    <div class="nav-grupo">Tu grupo</div>
+    <a class="nav-item" data-vista="comunidad">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3.5 20c0-3 2.5-5.5 5.5-5.5s5.5 2.5 5.5 5.5"/><circle cx="17.5" cy="9" r="2.3"/><path d="M15 14.3c2.6.4 4.5 2.5 4.5 5.2"/></svg>
+      Comunidad
+      <span class="badge">3</span>
+    </a>
+
+    <a class="nav-item" data-vista="ajustes" style="margin-top:auto">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 13a7.4 7.4 0 0 0 0-2l2-1.6-2-3.4-2.4.7a7.7 7.7 0 0 0-1.7-1L14.8 3h-4l-.5 2.7a7.7 7.7 0 0 0-1.7 1l-2.4-.7-2 3.4L6 11a7.4 7.4 0 0 0 0 2l-2 1.6 2 3.4 2.4-.7a7.7 7.7 0 0 0 1.7 1l.5 2.7h4l.5-2.7a7.7 7.7 0 0 0 1.7-1l2.4.7 2-3.4-2-1.6Z"/></svg>
+      Ajustes
+    </a>
+
+    <div class="sidebar-pie">
+      <span class="avatar">M</span>
+      <span class="quien"><b>María</b><span>alumna (ejemplo)</span></span>
+    </div>
+  </aside>
+
+  <!-- ══════════ MAIN ══════════ -->
+  <main>
+
+    <div class="topbar">
+      <div class="buscador">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M20 20l-4.8-4.8"/></svg>
+        <input type="text" placeholder="Buscar tema, supuesto o artículo…">
+      </div>
+      <div class="topbar-acciones">
+        <button class="campana" aria-label="Notificaciones">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 10a6 6 0 1 1 12 0c0 4 1.5 5.5 1.5 5.5H4.5S6 14 6 10Z"/><path d="M10 19a2 2 0 0 0 4 0"/></svg>
+          <span class="punto" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ═══ VISTA: INICIO ═══ -->
+    <section class="vista activa" id="vista-inicio">
+      <div class="cabecera-vista">
+        <div>
+          <h1>Hola, María 👋</h1>
+          <p>Esto es lo que ve cada alumno/a al entrar: su progreso, lo próximo que le toca y las últimas novedades.</p>
+        </div>
+      </div>
+
+      <a class="panel continua-card" href="#">
+        <div class="continua-icono">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#B76E79" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="8,5 19,12 8,19"/></svg>
+        </div>
+        <div>
+          <span class="continua-kicker">Continúa por aquí</span>
+          <h3>Tema 7 · Conceptos básicos sobre la comunicación y el lenguaje. Adquisición y desarrollo de la comunicación y del lenguaje y su relación con el desarrollo del pensamiento, social y afectivo.</h3>
+          <p>Lo dejaste a mitad la semana pasada (27 jun)</p>
+        </div>
+      </a>
+
+      <div class="resumen-grid">
+        <div class="panel progreso-panel">
+          <div class="anillo">
+            <svg viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="42" fill="none" stroke="#F3ECEC" stroke-width="10"/>
+              <circle cx="50" cy="50" r="42" fill="none" stroke="#B76E79" stroke-width="10"
+                stroke-linecap="round" stroke-dasharray="264" stroke-dashoffset="180"/>
+            </svg>
+            <div class="num"><b>32%</b><span>completado</span></div>
+          </div>
+          <div class="progreso-texto">
+            <h3>Tu preparación</h3>
+            <p>8 de 25 temas desbloqueados y trabajados.</p>
+            <span class="pill">Ritmo semanal · en marcha</span>
+          </div>
+        </div>
+
+        <div class="panel proximas">
+          <h2 style="font-size:1rem;margin-bottom:14px">Próximas fechas</h2>
+          <ul>
+            <li>
+              <span class="fecha-chip"><b>12</b><span>jul</span></span>
+              <span class="txt"><b>Entrega: Supuesto TEL</b><span>Grupo del jueves</span></span>
+            </li>
+            <li>
+              <span class="fecha-chip"><b>15</b><span>jul</span></span>
+              <span class="txt"><b>Sesión semanal</b><span>Online · 18:00</span></span>
+            </li>
+            <li>
+              <span class="fecha-chip"><b>19</b><span>jul</span></span>
+              <span class="txt"><b>Tema 12 disponible</b><span>Se desbloquea automáticamente</span></span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="novedades">
+        <h2>Novedades</h2>
+        <div class="nov-grid">
+          <a class="nov-card" href="#">
+            <span class="nuevo-dot" aria-hidden="true"></span>
+            <span class="tag">Tema</span>
+            <h4>Tema 8 — Bases anatómicas, fisiológicas y neurológicas del lenguaje. Procesos de codificación y decodificación lingüística. Descripción y análisis de los componentes del lenguaje</h4>
+            <p>Ya disponible: teoría, esquema y resumen.</p>
+          </a>
+          <a class="nov-card" href="#">
+            <span class="tag">Corrección</span>
+            <h4>Supuesto TEL corregido</h4>
+            <p>Macu te ha dejado comentarios en tu entrega.</p>
+          </a>
+          <a class="nov-card" href="#">
+            <span class="tag">Artículo</span>
+            <h4>Orden 30 de mayo — claves para AL</h4>
+            <p>Normativa comentada, lectura de 5 minutos.</p>
+          </a>
+        </div>
+      </div>
+
+      <div class="cierre-demo">
+        <h2>¿Te imaginas preparar así tu oposición?</h2>
+        <p>Materiales claros que se desbloquean a tu ritmo, corrección personalizada, tu calendario
+        y la comunidad de tu grupo — todo en un solo sitio.</p>
+        <a href="index.html#contacto">Quiero información</a>
+      </div>
+    </section>
+
+    <!-- ═══ VISTA: TEMARIO ═══ -->
+    <section class="vista" id="vista-temario">
+      <div class="cabecera-vista">
+        <div>
+          <h1>Temario</h1>
+          <p>Los temas se desbloquean según avanza tu preparación.</p>
+        </div>
+      </div>
+
+      <div class="modulo">
+        <div class="modulo-cabecera">
+          <h3>Bloque 1 · Marco normativo y atención a la diversidad</h3>
+          <span class="cuenta">4/4 completos</span>
+          <div class="modulo-barra"><i style="width:100%"></i></div>
+        </div>
+        <div class="temas-grid">
+          <div class="tema-card completo">
+            <span class="num">✓</span>
+            <div><h4>Tema 1</h4><p>La evolución de la educación especial en Europa en las últimas décadas: de la institucionalización y del modelo clínico a la normalización de servicios y al modelo pedagógico</p><span class="estado-mini completo">Completado</span></div>
+          </div>
+          <div class="tema-card completo">
+            <span class="num">✓</span>
+            <div><h4>Tema 2</h4><p>La educación especial en el marco de la LOGSE y su desarrollo normativo. El concepto de alumnos con necesidades educativas especiales</p><span class="estado-mini completo">Completado</span></div>
+          </div>
+          <div class="tema-card completo">
+            <span class="num">✓</span>
+            <div><h4>Tema 3</h4><p>El proceso de identificación y valoración de las necesidades educativas especiales de los alumnos y de las alumnas y su relación con el currículo. Decisiones de escolarización</p><span class="estado-mini completo">Completado</span></div>
+          </div>
+          <div class="tema-card completo">
+            <span class="num">✓</span>
+            <div><h4>Tema 4</h4><p>El centro ordinario y la respuesta a las necesidades especiales de los alumnos y de las alumnas. El Proyecto Educativo y el Proyecto Curricular en relación con estos alumnos. Las adaptaciones curriculares</p><span class="estado-mini completo">Completado</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modulo">
+        <div class="modulo-cabecera">
+          <h3>Bloque 2 · Comunicación, lenguaje y su desarrollo</h3>
+          <span class="cuenta">2/4 en curso</span>
+          <div class="modulo-barra"><i style="width:50%"></i></div>
+        </div>
+        <div class="temas-grid">
+          <div class="tema-card">
+            <span class="num">7</span>
+            <div><h4>Tema 7</h4><p>Conceptos básicos sobre la comunicación y el lenguaje. Adquisición y desarrollo de la comunicación y del lenguaje y su relación con el desarrollo del pensamiento, social y afectivo.</p><span class="estado-mini pendiente">Por trabajar</span></div>
+          </div>
+          <div class="tema-card">
+            <span class="num">8</span>
+            <div><h4>Tema 8</h4><p>Bases anatómicas, fisiológicas y neurológicas del lenguaje. Procesos de codificación y decodificación lingüística. Descripción y análisis de los componentes del lenguaje</p><span class="estado-mini pendiente">Por trabajar</span></div>
+          </div>
+          <div class="tema-card bloqueado">
+            <span class="num">🔒</span>
+            <div><h4>Tema 9</h4><p>Características del lenguaje de los alumnos y de las alumnas de Educación Infantil y Primaria. Alteraciones del lenguaje más frecuentes en estas etapas educativas. Actuaciones preventivas</p><span class="estado-mini pendiente">Bloqueado</span></div>
+          </div>
+          <div class="tema-card bloqueado">
+            <span class="num">🔒</span>
+            <div><h4>Tema 10</h4><p>Sistemas alternativos y complementarios de comunicación. El proceso de evaluación y toma de decisiones sobre los sistemas alternativos. El proceso de intervención</p><span class="estado-mini pendiente">Bloqueado</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modulo">
+        <div class="modulo-cabecera">
+          <h3>Bloque 3 · La intervención logopédica</h3>
+          <span class="cuenta">Se desbloquea más adelante</span>
+          <div class="modulo-barra"><i style="width:0%"></i></div>
+        </div>
+        <div class="temas-grid">
+          <div class="tema-card bloqueado">
+            <span class="num">🔒</span>
+            <div><h4>Tema 11</h4><p>Las necesidades educativas especiales de los alumnos y de las alumnas con deficiencia auditiva. Aspectos diferenciales en el desarrollo de la comunicación y del lenguaje</p><span class="estado-mini pendiente">Bloqueado</span></div>
+          </div>
+          <div class="tema-card bloqueado">
+            <span class="num">🔒</span>
+            <div><h4>Tema 25</h4><p>La intervención del maestro de audición y lenguaje con alumnos y alumnas con alteraciones del lenguaje. Criterios para la elaboración de adaptaciones curriculares</p><span class="estado-mini pendiente">Bloqueado</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ VISTA: MIS ENTREGAS ═══ -->
+    <section class="vista" id="vista-entregas">
+      <div class="cabecera-vista">
+        <div>
+          <h1>Mis entregas</h1>
+          <p>Sube tu material y Macu te lo devuelve corregido con comentarios.</p>
+        </div>
+      </div>
+
+      <div class="tabla-entregas">
+        <div class="fila-e">
+          <span class="doc"><b>Supuesto — Alumno con TEL en 2º de Primaria</b><span>Enviado el 28 de junio, 18:12</span></span>
+          <span class="estado-tag ok">CORREGIDO</span>
+          <span class="accion">Descargar →</span>
+        </div>
+        <div class="fila-e">
+          <span class="doc"><b>Tema 7 — redacción propia</b><span>Enviado el 1 de julio, 21:47</span></span>
+          <span class="estado-tag pendiente">EN REVISIÓN</span>
+          <span class="accion">—</span>
+        </div>
+      </div>
+
+      <div class="subir-zona">
+        <b>⬆ Subir nueva entrega</b>
+        Arrastra aquí tu PDF o documento, o haz clic para seleccionarlo.
+      </div>
+    </section>
+
+    <!-- ═══ VISTA: CALENDARIO ═══ -->
+    <section class="vista" id="vista-calendario">
+      <div class="cabecera-vista">
+        <div>
+          <h1>Calendario</h1>
+          <p>Fechas de entrega y sesiones que Macu organiza para tu grupo.</p>
+        </div>
+      </div>
+
+      <div class="calendario-layout">
+        <div class="panel">
+          <div class="mes-cabecera">
+            <h3>Julio 2026</h3>
+            <div class="mes-nav">
+              <button aria-label="Mes anterior">‹</button>
+              <button aria-label="Mes siguiente">›</button>
+            </div>
+          </div>
+          <div class="grid-dias"><span>L</span><span>M</span><span>X</span><span>J</span><span>V</span><span>S</span><span>D</span></div>
+          <div class="grid-mes">
+            <span class="dia fuera">29</span><span class="dia fuera">30</span><span class="dia">1</span><span class="dia">2</span><span class="dia">3</span><span class="dia hoy">4</span><span class="dia">5</span>
+            <span class="dia">6</span><span class="dia">7</span><span class="dia">8</span><span class="dia">9</span><span class="dia">10</span><span class="dia">11</span><span class="dia evento">12</span>
+            <span class="dia">13</span><span class="dia">14</span><span class="dia evento">15</span><span class="dia">16</span><span class="dia">17</span><span class="dia">18</span><span class="dia evento">19</span>
+            <span class="dia">20</span><span class="dia">21</span><span class="dia">22</span><span class="dia">23</span><span class="dia">24</span><span class="dia">25</span><span class="dia">26</span>
+            <span class="dia">27</span><span class="dia">28</span><span class="dia">29</span><span class="dia">30</span><span class="dia">31</span><span class="dia fuera">1</span><span class="dia fuera">2</span>
+          </div>
+        </div>
+
+        <div class="panel agenda">
+          <h3>Próximos eventos</h3>
+          <div class="agenda-item">
+            <span class="fecha-chip"><b>12</b><span>jul</span></span>
+            <span class="txt"><b>Entrega: Supuesto TEL</b><span>Grupo del jueves</span></span>
+          </div>
+          <div class="agenda-item">
+            <span class="fecha-chip"><b>15</b><span>jul</span></span>
+            <span class="txt"><b>Sesión semanal</b><span>Online · 18:00</span></span>
+          </div>
+          <div class="agenda-item">
+            <span class="fecha-chip"><b>19</b><span>jul</span></span>
+            <span class="txt"><b>Tema 12 disponible</b><span>Desbloqueo automático</span></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ VISTA: COMUNIDAD ═══ -->
+    <section class="vista" id="vista-comunidad">
+      <div class="cabecera-vista">
+        <div>
+          <h1>Comunidad · Grupo del jueves</h1>
+          <p>Espacio solo para tu grupo reducido: dudas, ánimos y lo que os haga falta comentar entre vosotros/as.</p>
+        </div>
+      </div>
+
+      <a class="panel nuevo-hilo" href="#">
+        <span class="avatar">M</span>
+        <span>Escribe algo a tu grupo…</span>
+      </a>
+
+      <div class="hilos">
+        <div class="hilo panel">
+          <div class="hilo-cabecera">
+            <span class="avatar">L</span>
+            <div><b>Laura</b><span class="hilo-fecha">Hace 2 horas · 4 jul, 11:20</span></div>
+          </div>
+          <p>¿Alguien ha terminado ya el supuesto del TEL? Tengo una duda con la parte de la coordinación con la tutora, no sé si meterla en medidas generales o específicas 🤔</p>
+          <div class="hilo-pie">
+            <span class="hilo-accion">💬 4 respuestas</span>
+          </div>
+        </div>
+        <div class="hilo panel">
+          <div class="hilo-cabecera">
+            <span class="avatar">S</span>
+            <div><b>Sara</b><span class="hilo-fecha">Ayer · 3 jul, 19:10</span></div>
+          </div>
+          <p>Ánimo a las que tenéis entrega esta semana, ¡el tema 7 cuesta pero se hace bola a bola! 💪</p>
+          <div class="hilo-pie">
+            <span class="hilo-accion">💬 2 respuestas</span>
+          </div>
+        </div>
+        <div class="hilo panel">
+          <div class="hilo-cabecera">
+            <span class="avatar" style="background:var(--tinta);color:#fff">M</span>
+            <div><b>Macu</b><span class="hilo-fecha">Hace 3 días · 1 jul, 18:05</span></div>
+          </div>
+          <p>Chicas, os dejo por aquí la referencia de la Orden 30 de mayo que comentamos en la sesión — os vendrá bien para el bloque de adaptaciones 📎</p>
+          <div class="hilo-pie">
+            <span class="hilo-accion">💬 6 respuestas</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ VISTA: AJUSTES ═══ -->
+    <section class="vista" id="vista-ajustes">
+      <div class="cabecera-vista">
+        <div>
+          <h1>Ajustes</h1>
+          <p>Tus datos y preferencias de la cuenta.</p>
+        </div>
+      </div>
+
+      <div class="panel" style="max-width:440px">
+        <div class="campo">
+          <label>Nombre</label>
+          <input type="text" value="María García" disabled>
+        </div>
+        <div class="campo">
+          <label>Email</label>
+          <input type="email" value="maria@ejemplo.com" disabled>
+        </div>
+        <div class="campo">
+          <label>Contraseña</label>
+          <a class="btn-mini" href="#">Cambiar contraseña</a>
+        </div>
+        <div class="campo campo-switch">
+          <label>Avisarme por email de novedades</label>
+          <span class="switch activo"></span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ══════════ NAV INFERIOR (móvil) ══════════ -->
+<nav class="nav-movil">
+  <a class="activo" data-vista="inicio">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11.5 12 4l8 7.5"/><path d="M6 10v9a1 1 0 0 0 1 1h3v-6h4v6h3a1 1 0 0 0 1-1v-9"/></svg>
+    Inicio
+  </a>
+  <a data-vista="temario">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5C4 4.7 4.7 4 5.5 4H11a2 2 0 0 1 2 2v13a1.5 1.5 0 0 0-1.5-1.5H4V5.5Z"/><path d="M20 5.5c0-.8-.7-1.5-1.5-1.5H13a2 2 0 0 0-2 2v13a1.5 1.5 0 0 1 1.5-1.5H20V5.5Z"/></svg>
+    Temario
+  </a>
+  <a data-vista="entregas">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1-4L15.5 5.5l3 3L8 20l-4 1Z"/><path d="M13 7l3 3"/></svg>
+    Entregas
+  </a>
+  <a data-vista="calendario">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 9.5h17"/><path d="M8 3v4M16 3v4"/></svg>
+    Calendario
+  </a>
+  <a data-vista="comunidad">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3.5 20c0-3 2.5-5.5 5.5-5.5s5.5 2.5 5.5 5.5"/><circle cx="17.5" cy="9" r="2.3"/><path d="M15 14.3c2.6.4 4.5 2.5 4.5 5.2"/></svg>
+    Comunidad
+  </a>
+</nav>
+
+<script>
+  document.addEventListener('touchstart', () => {}, { passive: true });
+  document.querySelectorAll('[data-vista]').forEach(item => {
+    item.addEventListener('click', (e) => {
+      e.preventDefault();
+      const v = item.dataset.vista;
+      document.querySelectorAll('[data-vista]').forEach(i => i.classList.toggle('activo', i.dataset.vista === v));
+      document.querySelectorAll('.vista').forEach(x => x.classList.remove('activa'));
+      document.getElementById('vista-' + v).classList.add('activa');
+      window.scrollTo(0, 0);
+    });
+  });
+</script>
+</body>
+</html>

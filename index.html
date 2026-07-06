@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Con voz propia — Preparación de oposiciones de Audición y Lenguaje</title>
+<meta name="description" content="Preparación de oposiciones de Audición y Lenguaje en Andalucía: temario propio actualizado a LOMLOE, supuestos prácticos, corrección personalizada y acompañamiento cercano.">
+<link rel="canonical" href="https://convozpropia.es/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Con voz propia — Preparación de oposiciones de Audición y Lenguaje">
+<meta property="og:description" content="Temario propio actualizado a LOMLOE, supuestos prácticos, corrección personalizada y acompañamiento cercano. Andalucía.">
+<meta property="og:image" content="https://convozpropia.es/assets/og-image.png">
+<meta property="og:url" content="https://convozpropia.es/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://convozpropia.es/assets/og-image.png">
+<meta name="theme-color" content="#B76E79">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "EducationalOrganization",
+  "name": "Con voz propia",
+  "description": "Preparación de oposiciones de Audición y Lenguaje en Andalucía: temario propio actualizado a LOMLOE, supuestos prácticos y corrección personalizada.",
+  "url": "https://convozpropia.es/",
+  "areaServed": "Andalucía, España",
+  "email": "convozpropiaopos@gmail.com"
+}
+</script>
+<link rel="icon" href='data:image/svg+xml,<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><path d="M 177.9 63.7 A 86 86 0 1 1 136.3 22.1" fill="none" stroke="%23B76E79" stroke-width="9" stroke-linecap="round"/><path d="M69 69 L100 132 L131 69" fill="none" stroke="%23B76E79" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/></svg>'>
+<link rel="stylesheet" href="css/fonts.css">
+<style>
+  :root{
+    --rosa:#B76E79;
+    --tinta:#5C3038;
+    --acento:#DCA6AE;
+    --fondo:#F9F0F1;
+    --blanco:#FFFFFF;
+    --gris:#7A6A6D;
+    --borde:#EFDFE1;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',sans-serif;
+    color:var(--tinta);
+    background:var(--blanco);
+    line-height:1.65;
+  }
+  h1,h2,h3{font-family:'Poppins',sans-serif;line-height:1.25}
+  a{color:inherit}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+  /* ───── marcador de contenido por confirmar ───── */
+  .confirmar{
+    outline:2px dashed #D9A13B;outline-offset:4px;border-radius:4px;position:relative;
+  }
+  .confirmar::after{
+    content:"✏️ POR CONFIRMAR (Macu)";
+    position:absolute;top:-12px;right:-6px;
+    background:#FBEED3;color:#8A6414;font-size:.62rem;font-weight:600;
+    padding:2px 8px;border-radius:99px;letter-spacing:.05em;font-family:'Inter',sans-serif;
+  }
+
+  /* ───── header ───── */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--borde);
+  }
+  .nav{display:flex;align-items:center;gap:28px;padding:14px 0}
+  .brand{display:flex;align-items:center;gap:11px;text-decoration:none;margin-right:auto}
+  .brand svg{width:38px;height:38px}
+  .brand span{font-family:'Poppins',sans-serif;font-weight:500;letter-spacing:.13em;font-size:.98rem}
+  .nav a.link{text-decoration:none;font-size:.9rem;color:var(--gris);transition:color .2s}
+  .nav a.link:hover{color:var(--rosa)}
+  .btn{
+    display:inline-block;text-decoration:none;font-family:'Poppins',sans-serif;font-weight:500;
+    padding:10px 22px;border-radius:99px;font-size:.9rem;transition:transform .15s, box-shadow .2s;
+  }
+  .btn:hover{transform:translateY(-1px)}
+  .btn-primario{background:var(--rosa);color:#fff;box-shadow:0 4px 14px rgba(183,110,121,.35)}
+  .btn-suave{background:var(--fondo);color:var(--tinta);border:1px solid var(--borde)}
+  .menu-btn{display:none;background:none;border:none;cursor:pointer;padding:6px}
+  .menu-btn svg{width:26px;height:26px;display:block}
+  .menu-movil{display:none;background:#fff;border-top:1px solid var(--borde)}
+  .menu-movil a{
+    display:block;padding:14px 24px;text-decoration:none;font-size:.95rem;
+    color:var(--tinta);border-bottom:1px solid var(--borde);
+  }
+  .menu-movil a:last-child{border-bottom:none}
+  .menu-movil a:active{background:var(--fondo)}
+  @media (max-width:720px){
+    .nav{gap:12px}
+    .nav a.link,.nav .btn{display:none}
+    .menu-btn{display:block}
+    .menu-movil.abierto{display:block}
+  }
+
+  /* ───── hero ───── */
+  .hero{background:linear-gradient(180deg,var(--fondo) 0%,#fff 100%);padding:72px 0 72px;text-align:center}
+  .hero svg.marca{width:96px;height:96px;margin-bottom:24px}
+  .hero h1{font-size:clamp(1.9rem,4.5vw,3rem);font-weight:600;max-width:21ch;margin:0 auto}
+  .hero h1 em{font-style:normal;color:var(--rosa)}
+  .hero p.sub{color:var(--gris);max-width:56ch;margin:20px auto 0;font-size:1.05rem}
+  .hero .chips{display:flex;gap:10px;justify-content:center;margin-top:22px;flex-wrap:wrap}
+  .hero .chip{background:#fff;border:1px solid var(--borde);border-radius:99px;padding:6px 16px;font-size:.8rem;color:var(--gris)}
+  .hero .cta{margin-top:36px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+  @keyframes entrada{ from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:none} }
+  .hero-anim{opacity:0;animation:entrada .7s ease forwards}
+  .hero-anim:nth-child(1){animation-delay:.05s}
+  .hero-anim:nth-child(2){animation-delay:.15s}
+  .hero-anim:nth-child(3){animation-delay:.25s}
+  .hero-anim:nth-child(4){animation-delay:.35s}
+  .hero-anim:nth-child(5){animation-delay:.45s}
+  @media (prefers-reduced-motion: reduce){
+    .hero-anim{opacity:1;animation:none}
+  }
+
+  /* ───── secciones ───── */
+  section{padding:76px 0}
+  section h2{font-size:1.7rem;font-weight:600;margin-bottom:12px}
+  section p.intro{color:var(--gris);max-width:62ch;margin-bottom:40px}
+  .kicker{
+    display:inline-block;font-size:.72rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--rosa);margin-bottom:10px;
+  }
+
+  /* método */
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+  .card{
+    background:#fff;border:1px solid var(--borde);border-radius:16px;padding:26px 24px;
+    position:relative;overflow:hidden;
+  }
+  .card.anim{transition:opacity .6s ease, transform .6s ease, translate .2s ease, box-shadow .2s ease}
+  .card:hover{translate:0 -3px;box-shadow:0 10px 26px rgba(92,48,56,.08)}
+  .card::after{
+    content:"";position:absolute;left:24px;right:24px;bottom:0;height:2px;
+    background:var(--rosa);scale:0 1;transform-origin:left;transition:scale .3s ease;
+  }
+  .card:hover::after{scale:1}
+  .card .icono{
+    width:44px;height:44px;border-radius:12px;background:var(--fondo);
+    display:flex;align-items:center;justify-content:center;margin-bottom:16px;
+    transition:background .25s ease;
+  }
+  .card:hover .icono{background:var(--rosa)}
+  .card .icono svg{width:23px;height:23px;color:var(--rosa);transition:color .25s ease}
+  .card:hover .icono svg{color:#fff}
+  .card h3{font-size:1.02rem;font-weight:600;margin-bottom:8px}
+  .card p{font-size:.9rem;color:var(--gris)}
+
+  /* sobre mí */
+  #sobre-mi{background:var(--fondo)}
+  .sobre{display:grid;grid-template-columns:280px 1fr;gap:48px;align-items:center}
+  @media (max-width:760px){ .sobre{grid-template-columns:1fr} }
+  .foto{
+    aspect-ratio:4/5;border-radius:18px;background:linear-gradient(160deg,var(--rosa) 0%,#9E5560 100%);
+    border:1px solid var(--rosa);
+    display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;
+    color:var(--gris);font-size:.85rem;
+  }
+  .marca-dibujo path{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 3s ease-in-out}
+  .marca-dibujo path:nth-child(2){transition-delay:2.6s}
+  .foto.visible .marca-dibujo path{stroke-dashoffset:0}
+  @media (prefers-reduced-motion: reduce){
+    .marca-dibujo path{stroke-dasharray:none;stroke-dashoffset:0;transition:none}
+  }
+  .sobre h2{margin-bottom:18px}
+  .sobre p{margin-bottom:14px}
+  .stats-mini{display:flex;gap:32px;margin-top:22px;padding-top:22px;border-top:1px solid var(--borde)}
+  .stats-mini .stat b{
+    display:block;font-family:'Poppins',sans-serif;font-weight:700;font-size:1.5rem;color:var(--rosa);
+  }
+  .stats-mini .stat span{font-size:.82rem;color:var(--gris)}
+
+  /* oposición */
+  .pasos{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px;counter-reset:paso}
+  .paso{
+    background:#fff;border:1px solid var(--borde);border-radius:16px;padding:24px;
+    position:relative;overflow:hidden;
+  }
+  .paso.anim{transition:opacity .6s ease, transform .6s ease, translate .2s ease, box-shadow .2s ease}
+  .paso:hover{translate:0 -3px;box-shadow:0 10px 26px rgba(92,48,56,.08)}
+  .paso::after{
+    content:"";position:absolute;left:24px;right:24px;bottom:0;height:2px;
+    background:var(--rosa);scale:0 1;transform-origin:left;transition:scale .3s ease;
+  }
+  .paso:hover::after{scale:1}
+  .paso::before{
+    counter-increment:paso;content:counter(paso);
+    font-family:'Poppins',sans-serif;font-weight:700;font-size:2.2rem;color:var(--acento);
+    display:block;margin-bottom:8px;transition:color .25s ease;
+  }
+  .paso:hover::before{color:var(--rosa)}
+  .paso h3{font-size:.98rem;margin-bottom:6px}
+  .paso p{font-size:.87rem;color:var(--gris)}
+  .fuente{font-size:.78rem;color:var(--gris);margin-top:20px}
+  .fuente a{color:var(--rosa)}
+
+  /* plataforma banner */
+  .banner{
+    background:linear-gradient(135deg,var(--tinta) 0%,#4A2530 100%);color:#fff;border-radius:22px;
+    padding:52px 48px;display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center;
+    position:relative;overflow:hidden;
+  }
+  .banner::before{
+    content:"";position:absolute;right:-60px;top:50%;translate:0 -50%;
+    width:280px;height:280px;background-image:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><path d="M 177.9 63.7 A 86 86 0 1 1 136.3 22.1" fill="none" stroke="white" stroke-width="4"/><path d="M69 69 L100 132 L131 69" fill="none" stroke="white" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+    background-size:contain;background-repeat:no-repeat;opacity:.06;pointer-events:none;
+  }
+  @media (max-width:760px){ .banner{grid-template-columns:1fr;text-align:center} }
+  .banner h2{color:#fff;position:relative}
+  .banner p{color:#E8CFD4;max-width:58ch;margin-top:10px;position:relative}
+  .banner .btn-suave{border:none;position:relative}
+
+  /* contacto */
+  #contacto{background:var(--fondo)}
+  .contacto-grid{display:flex;gap:16px;flex-wrap:wrap;margin-top:8px}
+  .contacto-card{
+    background:#fff;border:1px solid var(--borde);border-radius:16px;padding:22px 26px;
+    display:flex;align-items:center;gap:14px;text-decoration:none;min-width:250px;
+    position:relative;overflow:hidden;
+  }
+  .contacto-card.anim{transition:opacity .6s ease, transform .6s ease, translate .2s ease, box-shadow .2s ease}
+  .contacto-card:hover{translate:0 -2px;box-shadow:0 8px 22px rgba(92,48,56,.1)}
+  .contacto-card::after{
+    content:"";position:absolute;left:26px;right:26px;bottom:0;height:2px;
+    background:var(--rosa);scale:0 1;transform-origin:left;transition:scale .3s ease;
+  }
+  .contacto-card:hover::after{scale:1}
+  .contacto-card .ci{
+    width:44px;height:44px;flex-shrink:0;border-radius:12px;background:var(--fondo);
+    display:flex;align-items:center;justify-content:center;transition:background .25s ease;
+  }
+  .contacto-card:hover .ci{background:var(--rosa)}
+  .contacto-card .ci svg{width:22px;height:22px;color:var(--rosa);transition:color .25s ease}
+  .contacto-card:hover .ci svg{color:#fff}
+  .contacto-card b{display:block;font-size:.95rem}
+  .contacto-card span{font-size:.82rem;color:var(--gris)}
+
+  footer{padding:36px 0 28px;border-top:1px solid var(--borde)}
+  footer .wrap{display:flex;align-items:center;gap:12px;color:var(--gris);font-size:.83rem}
+  footer svg{width:26px;height:26px}
+  footer .der{margin-left:auto}
+  footer a{transition:color .2s ease}
+  footer a:hover{color:var(--rosa)}
+  footer .brand-link{display:flex;text-decoration:none}
+  .credito{
+    text-align:center;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;
+    color:rgba(92,48,56,.35);margin-top:18px;
+  }
+
+  /* animación de entrada */
+  .anim{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease}
+  .anim.visible{opacity:1;transform:none}
+  @media (prefers-reduced-motion: reduce){
+    .anim{opacity:1;transform:none;transition:none}
+    html{scroll-behavior:auto}
+  }
+
+  /* en pantallas táctiles no hay hover: la línea y el icono responden al toque */
+  @media (hover: none){
+    .card:active::after,.paso:active::after,.contacto-card:active::after{scale:1}
+    .card:active,.paso:active,.contacto-card:active{translate:0 -2px;box-shadow:0 8px 20px rgba(92,48,56,.08)}
+    .card:active .icono,.contacto-card:active .ci{background:var(--rosa)}
+    .card:active .icono svg,.contacto-card:active .ci svg{color:#fff}
+    .paso:active::before{color:var(--rosa)}
+  }
+</style>
+<!-- Umami Analytics -->
+<script defer src="https://umami.academiaesparta.es/script.js" data-website-id="65bc82c1-d823-46e6-87de-dd8555c4983e"></script>
+</head>
+<body>
+
+<!-- ═════════ HEADER ═════════ -->
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="index.html">
+      <svg aria-hidden="true" viewBox="0 0 200 200"><path d="M 177.9 63.7 A 86 86 0 1 1 136.3 22.1" fill="none" stroke="#B76E79" stroke-width="7.5" stroke-linecap="round"/><path d="M69 69 L100 132 L131 69" fill="none" stroke="#B76E79" stroke-width="12.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>con voz propia</span>
+    </a>
+    <a class="link" href="#metodo">Método</a>
+    <a class="link" href="#sobre-mi">Sobre mí</a>
+    <a class="link" href="#oposicion">La oposición</a>
+    <a class="link" href="blog/index.html">Blog</a>
+    <a class="link" href="#contacto">Contacto</a>
+    <a class="btn btn-suave" href="demo.html">Ver demo</a>
+    <a class="btn btn-primario" href="https://app.convozpropia.es">Acceder</a>
+    <button class="menu-btn" id="menu-btn" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-movil">
+      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="#5C3038" stroke-width="2" stroke-linecap="round">
+        <line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/>
+      </svg>
+    </button>
+  </div>
+  <nav class="menu-movil" id="menu-movil">
+    <a href="#metodo">Método</a>
+    <a href="#sobre-mi">Sobre mí</a>
+    <a href="#oposicion">La oposición</a>
+    <a href="blog/index.html">Blog</a>
+    <a href="#contacto">Contacto</a>
+    <a href="https://app.convozpropia.es" style="color:#B76E79;font-weight:600">Acceder</a>
+  </nav>
+</header>
+
+<!-- ═════════ HERO ═════════ -->
+<div class="hero">
+  <div class="wrap">
+    <svg aria-hidden="true" class="marca hero-anim" viewBox="0 0 200 200"><path d="M 177.9 63.7 A 86 86 0 1 1 136.3 22.1" fill="none" stroke="#B76E79" stroke-width="6.5" stroke-linecap="round"/><path d="M69 69 L100 132 L131 69" fill="none" stroke="#B76E79" stroke-width="11.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <h1 class="hero-anim">Tu plaza de Audición y Lenguaje, <em>con voz propia</em></h1>
+    <p class="sub hero-anim">Preparación de oposiciones de AL con temario propio actualizado, supuestos prácticos
+    y un acompañamiento cercano, de maestra a maestro/a.</p>
+    <div class="chips hero-anim">
+      <span class="chip">Andalucía</span>
+      <span class="chip">LOMLOE · normativa al día</span>
+      <span class="chip">Cuerpo de Maestros · AL</span>
+    </div>
+    <div class="cta hero-anim">
+      <a class="btn btn-primario" href="#contacto">Quiero información</a>
+      <a class="btn btn-suave" href="#metodo">Cómo trabajo</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═════════ MÉTODO ═════════ -->
+<section id="metodo">
+  <div class="wrap">
+    <span class="kicker anim">El método</span>
+    <h2 class="anim">Una preparación pensada para que llegues con seguridad</h2>
+    <p class="intro anim">Nada de apuntes heredados ni temarios de hace diez años: material propio,
+    al día con la normativa andaluza, y un seguimiento real de tu evolución.</p>
+    <div class="cards">
+      <div class="card anim">
+        <div class="icono" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5C4 4.7 4.7 4 5.5 4H11a2 2 0 0 1 2 2v13a1.5 1.5 0 0 0-1.5-1.5H4V5.5Z"/><path d="M20 5.5c0-.8-.7-1.5-1.5-1.5H13a2 2 0 0 0-2 2v13a1.5 1.5 0 0 1 1.5-1.5H20V5.5Z"/></svg></div>
+        <h3>Temario propio y actualizado</h3>
+        <p>Los 25 temas de AL elaborados y revisados con la LOMLOE y la normativa vigente de Andalucía, verificada en el BOJA.</p>
+      </div>
+      <div class="card anim">
+        <div class="icono" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="12" rx="2"/><path d="M9 20h6M12 16.5V20"/><path d="M9.5 8.3v4.4l4-2.2-4-2.2Z" fill="currentColor" stroke="none"/></svg></div>
+        <h3>Presentaciones interactivas</h3>
+        <p>Cada tema en una presentación web navegable, clara y visual — para estudiar y repasar sin perderte en folios.</p>
+      </div>
+      <div class="card anim">
+        <div class="icono" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/><path d="M8.5 12.7l2 2 4.5-5"/></svg></div>
+        <h3>Supuestos prácticos</h3>
+        <p>Modelos resueltos y práctica guiada del formato que decide la oposición.</p>
+      </div>
+      <div class="card anim">
+        <div class="icono" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1-4L15.5 5.5l3 3L8 20l-4 1Z"/><path d="M13 7l3 3"/></svg></div>
+        <h3>Corrección personalizada</h3>
+        <p>Me envías tus temas, supuestos, plan de apoyo y exámenes, y te los devuelvo corregidos con indicaciones concretas para mejorar.</p>
+      </div>
+      <div class="card anim">
+        <div class="icono" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="3.5"/><path d="M10 13l9-9"/><path d="M15 8l2 2"/><path d="M17.5 5.5l2 2"/></svg></div>
+        <h3>Plataforma propia</h3>
+        <p>Tu zona de alumno/a con los materiales organizados, que se van desbloqueando conforme avanza tu preparación.</p>
+      </div>
+      <div class="card anim">
+        <div class="icono" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3.5 20c0-3 2.5-5.5 5.5-5.5s5.5 2.5 5.5 5.5"/><circle cx="17.5" cy="9" r="2.3"/><path d="M15 14.3c2.6.4 4.5 2.5 4.5 5.2"/></svg></div>
+        <h3>Seguimiento cercano</h3>
+        <p>Grupos reducidos, en formato mixto (presencial y online), con sesiones semanales para no perder el ritmo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ SOBRE MÍ ═════════ -->
+<section id="sobre-mi">
+  <div class="wrap sobre">
+    <div class="foto anim">
+      <svg aria-hidden="true" class="marca-dibujo" style="width:150px;height:150px" viewBox="0 0 200 200"><path pathLength="1" d="M 177.9 63.7 A 86 86 0 1 1 136.3 22.1" fill="none" stroke="#FFFFFF" stroke-width="6.5" stroke-linecap="round"/><path pathLength="1" d="M69 69 L100 132 L131 69" fill="none" stroke="#FFFFFF" stroke-width="11.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <div>
+      <span class="kicker anim">Sobre mí</span>
+      <h2 class="anim">Hola, soy Macu</h2>
+      <p class="anim">Maestra de Audición y Lenguaje y preparadora de oposiciones de AL.</p>
+      <p class="anim">Soy maestra de AL desde 2010, y desde 2016 acompaño a maestros/as en su
+      preparación para la oposición.</p>
+      <p class="anim">Preparo la especialidad que conozco de primera mano, con el material que a mí me habría
+      gustado tener: claro, actualizado y hecho para la oposición de Andalucía.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ LA OPOSICIÓN ═════════ -->
+<section id="oposicion">
+  <div class="wrap">
+    <span class="kicker anim">La oposición</span>
+    <h2 class="anim">¿Cómo es la oposición de AL en Andalucía?</h2>
+    <p class="intro anim">El proceso selectivo del Cuerpo de Maestros consta de una fase de oposición (dos pruebas)
+    y una fase de concurso de méritos, a la que solo se accede tras superar la oposición.</p>
+    <div class="pasos">
+      <div class="paso anim">
+        <h3>Prueba 1 · Parte A</h3>
+        <p>Supuesto práctico: resolución de un supuesto de intervención en AL.</p>
+      </div>
+      <div class="paso anim">
+        <h3>Prueba 1 · Parte B</h3>
+        <p>Desarrollo por escrito de uno de los 25 temas de la especialidad.</p>
+      </div>
+      <div class="paso anim">
+        <h3>Prueba 2</h3>
+        <p>Defensa de la programación didáctica y exposición oral de una unidad didáctica ante el tribunal. En AL, la programación es un plan de apoyo anual.</p>
+      </div>
+      <div class="paso anim">
+        <h3>Fase de concurso</h3>
+        <p>Experiencia docente, formación académica y otros méritos, una vez superada la fase de oposición.</p>
+      </div>
+    </div>
+    <p class="fuente anim">Estructura según el Reglamento estatal de ingreso a los cuerpos docentes
+    (<a href="https://www.boe.es/buscar/doc.php?id=BOE-A-2007-4372" target="_blank" rel="noopener">RD 276/2007</a>)
+    y la última convocatoria de Andalucía
+    (<a href="https://www.juntadeandalucia.es/boja/2025/38/11" target="_blank" rel="noopener">Orden de 21 de febrero de 2025</a>, BOJA núm. 38).
+    Los detalles pueden variar en cada convocatoria.</p>
+  </div>
+</section>
+
+<!-- ═════════ BANNER PLATAFORMA ═════════ -->
+<section>
+  <div class="wrap">
+    <div class="banner anim">
+      <div>
+        <h2>Así trabajan mis alumnos/as</h2>
+        <p>Cada alumno/a tiene su espacio personal con los temas, supuestos y presentaciones organizados,
+        sus entregas corregidas y su progreso en un solo sitio. Entra en la demo y velo por dentro.</p>
+      </div>
+      <a class="btn btn-suave" href="demo.html">Ver la demo</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ CONTACTO ═════════ -->
+<section id="contacto">
+  <div class="wrap">
+    <span class="kicker anim">Contacto</span>
+    <h2 class="anim">¿Hablamos?</h2>
+    <p class="intro anim">Cuéntame en qué punto estás de tu preparación y vemos cómo puedo ayudarte.</p>
+    <div class="contacto-grid">
+      <a class="contacto-card anim" href="mailto:convozpropiaopos@gmail.com">
+        <span class="ci" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M4 6.5l8 6 8-6"/></svg></span>
+        <span><b>Email</b><span>convozpropiaopos@gmail.com</span></span>
+      </a>
+      <a class="contacto-card anim" href="https://www.instagram.com/convozpropiaopos/">
+        <span class="ci" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="14" rx="3"/><circle cx="12" cy="13" r="3.4"/><path d="M8 6l1.4-2h5.2L16 6"/></svg></span>
+        <span><b>Instagram</b><span>@convozpropiaopos</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ FOOTER ═════════ -->
+<footer>
+  <div class="wrap">
+    <a class="brand-link" href="index.html" aria-label="Ir al inicio">
+      <svg aria-hidden="true" viewBox="0 0 200 200"><path d="M 177.9 63.7 A 86 86 0 1 1 136.3 22.1" fill="none" stroke="#B76E79" stroke-width="7.5" stroke-linecap="round"/><path d="M69 69 L100 132 L131 69" fill="none" stroke="#B76E79" stroke-width="12.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <span>© 2026 Con voz propia · Preparación de oposiciones de Audición y Lenguaje</span>
+    <span class="der"><a href="legal/aviso-legal.html">Aviso legal</a> · <a href="legal/privacidad.html">Privacidad</a></span>
+  </div>
+  <p class="credito">Diseño y desarrollo por Miguel Ángel Ortega Álvarez</p>
+</footer>
+
+<script>
+  // iOS Safari solo aplica :active si hay un listener táctil registrado
+  document.addEventListener('touchstart', () => {}, { passive: true });
+
+  const menuBtn = document.getElementById('menu-btn');
+  const menuMovil = document.getElementById('menu-movil');
+  menuBtn.addEventListener('click', () => {
+    const abierto = menuMovil.classList.toggle('abierto');
+    menuBtn.setAttribute('aria-expanded', abierto);
+  });
+  menuMovil.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    menuMovil.classList.remove('abierto');
+    menuBtn.setAttribute('aria-expanded', 'false');
+  }));
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const cardsParent = e.target.closest('.cards, .pasos, .contacto-grid');
+      if (cardsParent) {
+        const i = [...cardsParent.children].indexOf(e.target);
+        setTimeout(() => e.target.classList.add('visible'), i * 90);
+      } else {
+        e.target.classList.add('visible');
+      }
+      obs.unobserve(e.target);
+    });
+  }, { threshold: .12 });
+  document.querySelectorAll('.anim').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

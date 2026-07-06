@@ -1,0 +1,41 @@
+# ── Con voz propia · WEB PÚBLICA — .gitignore ───────────────────────────
+# ⚠️ Este repo es PÚBLICO (GitHub Pages). Aquí SOLO va la web pública.
+# El material de Macu (temario, presentaciones, supuestos) y CUALQUIER dato de
+# alumnado NUNCA entran aquí. Réplica del patrón de la web de la academia.
+
+.DS_Store
+*.log
+.idea/
+.vscode/
+
+# ── Secretos y credenciales — NUNCA (y menos en un repo público) ────────
+.env
+.env.*
+*.env
+secrets.*
+credentials.*
+*credentials*
+*_secret*
+*_token*
+*.pem
+*.key
+HOSTINGER_CREDENTIALS.txt
+DONDOMINIO_CREDENTIALS.txt
+SESION_RESUMEN*.md
+
+# ── Notas internas / material / datos sensibles — NUNCA al repo público ──
+notas/
+docs/
+backups/
+datos-alumnos/
+datos-alumnado/
+material/
+temario/
+supuestos/
+privado/
+interno/
+
+# ── Borradores del blog: solo en local hasta que Macu los valide ─────────
+blog/oposiciones-audicion-y-lenguaje-andalucia.html
+blog/_borradores.html
+blog/_revision/
